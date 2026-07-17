@@ -97,6 +97,5 @@ The same pipeline works across scales because the decomposition layer adjusts to
 
 ## Related Projects
 
-- [PRD to JIRA Agent](https://github.com/shuvojit0194-star/PRD_to_Jira_AI_Agent) — the n8n workflow powering the decomposition → JIRA creation step
 - [MCP Chatbot](https://github.com/shuvojit0194-star/Chatbot) — a live project built end-to-end using this pipeline
 - [Weather Feature SCRUM Specs](https://github.com/shuvojit0194-star/Weather_Feature_SCRUM) — example EARS-format ticket specs that feed the coding agent
