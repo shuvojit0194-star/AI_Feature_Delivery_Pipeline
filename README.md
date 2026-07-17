@@ -1,54 +1,72 @@
 # AI-Powered IT Feature Delivery Pipeline
 
-Autonomous end-to-end SDLC pipeline that takes a Product Requirements Document (PRD) and delivers production-deployed code — replacing a 16-step manual process with a single human trigger.
+An end-to-end autonomous SDLC pipeline that takes a Product Requirements Document and delivers production-deployed code — replacing a 16-step manual process with a single human trigger.
 
-## What It Does
+## Pipeline Architecture
 
-| Phase | Step | Tool |
-|---|---|---|
-| 1 | Parse PRD → decompose into Epics & Stories | Claude AI |
-| 2 | Generate EARS-format acceptance criteria | Claude AI |
-| 3 | Create & transition JIRA tickets | Atlassian Rovo MCP |
-| 4 | Scaffold code, commit to feature branch | GitHub MCP |
-| 5 | Trigger CI/CD pipeline | GitHub Actions |
-| 6 | Deploy to production | Render |
+### Before (Manual — 16 Steps)
+![Manual SDLC Process](pipeline_before.png)
 
-Human-in-the-loop at two checkpoints only: PRD creation and ticket review before code generation.
+### After (AI-Automated)
+![AI-Powered Pipeline](pipeline_after.png)
 
-## Architecture
+---
+
+## How It Works
 
 ```
 PRD Input
    │
    ▼
-Claude AI (Orchestrator)
-   ├── Atlassian Rovo MCP → JIRA Epic/Story creation
-   ├── GitHub MCP         → Code scaffold + branch commit
-   ├── GitHub Actions     → CI/CD (test → build → push)
-   └── Render             → Auto-deploy on merge
+Claude AI — decomposes PRD into Epics & Stories
+   │         with EARS-format acceptance criteria
+   │
+   ▼
+Atlassian Rovo MCP — creates structured JIRA tickets
+   │                  (Epic → Stories → Acceptance Criteria)
+   │
+   ▼
+WebStorm IDE — JIRA integration pulls ticket automatically
+   │            Claude AI coding agent reads the spec
+   │            and implements the code (spec-driven development)
+   │
+   ▼
+GitHub — code committed to feature branch
+   │
+   ▼
+GitHub Actions — CI/CD pipeline (test → build → push)
+   │
+   ▼
+Render — auto-deploy to production
 ```
+
+## Human Touchpoints
+
+Only **two** human checkpoints in the entire pipeline:
+1. Writing the PRD
+2. Reviewing JIRA tickets before code generation begins
+
+Everything else — decomposition, spec writing, ticket creation, coding, CI/CD, and deployment — is automated.
+
+## What Makes This Different
+
+The key insight: **the JIRA ticket IS the spec.**
+
+JIRA stories are written in EARS format (Easy Approach to Requirements Syntax) with precise acceptance criteria. When WebStorm's JIRA integration surfaces the ticket to the Claude AI coding agent, Claude has everything it needs to implement the feature without further instruction — no Slack messages, no handoff meetings, no back-and-forth.
 
 ## Tech Stack
 
-- **Orchestrator:** Claude AI (claude-sonnet-4-5)
-- **MCP Integrations:** Atlassian Rovo MCP, GitHub MCP
-- **CI/CD:** GitHub Actions
-- **Deployment:** Render
-- **Language:** Python
-
-## Business Impact
-
-Eliminates an estimated 16 manual steps per feature — from PRD to deployed code — while maintaining full audit trail in JIRA and Git.
-
-## Files
-
-| File | Description |
+| Layer | Tool |
 |---|---|
-| `pipeline_before.png` | Manual 16-step SDLC workflow (as-is) |
-| `pipeline_after.png` | AI-automated pipeline (to-be) |
-| `project_overview.docx` | Full design document |
+| PRD Decomposition | Claude AI |
+| JIRA Integration | Atlassian Rovo MCP |
+| IDE + Coding Agent | WebStorm + Claude AI |
+| Version Control | GitHub |
+| CI/CD | GitHub Actions |
+| Deployment | Render |
 
 ## Related Projects
 
-- [PRD to JIRA AI Agent](../PRD_to_Jira_AI_Agent) — the JIRA decomposition layer
-- [MCP Deploy](../MCP_Deploy) — the MCP server powering agent integrations
+- [PRD to JIRA Agent](https://github.com/shuvojit0194-star/PRD_to_Jira_AI_Agent) — the n8n workflow that handles PRD decomposition → JIRA ticket creation
+- [MCP Chatbot](https://github.com/shuvojit0194-star/Chatbot) — a live project built using this pipeline
+- [Weather Feature SCRUM Specs](https://github.com/shuvojit0194-star/Weather_Feature_SCRUM) — example EARS-format ticket specs that feed the coding agent
