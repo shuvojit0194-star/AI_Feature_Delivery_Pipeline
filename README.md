@@ -2,6 +2,10 @@
 
 An end-to-end autonomous SDLC pipeline that takes any IT requirement — from a one-line enhancement request to a full PRD — and delivers production-deployed code. Replaces a 16-step manual process with a single human trigger.
 
+## Why I Built This
+
+As a Product Owner managing 3 scrum teams at Charter Communications, I lived inside this 16-step process daily — writing requirements, creating JIRA tickets, briefing engineers, reviewing PRs, coordinating deployments. Each step had handoff latency, context loss, and meeting overhead. I built this pipeline to collapse those 16 steps into 2 human touchpoints, using AI to handle everything in between. The goal wasn't to replace the team — it was to eliminate the coordination tax so the team could focus on decisions that actually require human judgment.
+
 ## Pipeline Architecture
 
 ### Before (Manual — 16 Steps)
